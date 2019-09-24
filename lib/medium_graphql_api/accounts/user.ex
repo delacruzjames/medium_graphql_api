@@ -30,8 +30,12 @@ defmodule MediumGraphqlApi.Accounts.User do
     |> update_change(:email, &String.downcase(&1))
     |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password)
-    |> unique_constraints(:email)
+    |> unique_constraint(:email)
     |> hash_password
+  end
+
+  defp hash_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Argon2.add_hash(password))
   end
 
   defp hash_password(changeset) do
