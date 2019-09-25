@@ -22,6 +22,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Guardian config details
+config :medium_graphql_api, MediumGraphqlApi.Guardian,
+  issuer: "medium_graphql_api",
+  secret_key: "mhlpTMIRBPRVE5+4AbPwraWN0GtkcvWiJjvC2El9S+L8V3mh5rhyzEtYVQ0yLsk+"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
